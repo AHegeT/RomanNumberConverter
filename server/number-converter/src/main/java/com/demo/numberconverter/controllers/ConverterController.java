@@ -13,15 +13,16 @@ public class ConverterController {
 
     static final String INVALID_MESSAGE = "Invalid format";
 
-    @GetMapping(path = "/convert")
-    public String getRomanConversion(@RequestParam(value = "initialValue") int numValue,
-                                     @RequestParam(value = "format") String format) {
+    @GetMapping(path = "/convert/{format}")
+    public String getRomanConversion(@PathVariable(name = "format") String format,
+                                     @RequestParam(value = "value") int numValue) {
+
         if (format == null || format.matches(Format.DECIMAL.getSimpleName())) {
             return this.converterService.convertDecimalToRoman(numValue);
+
         } else if (format.matches(Format.BINARY.getSimpleName())) {
             return this.converterService.convertBinaryToRoman(numValue);
         }
-        // TODO: Create a Custom Exception
         return INVALID_MESSAGE;
     }
 }

@@ -8,6 +8,6 @@ const App: React.FC = () => {
       <NumberConverter/>
     </div>
   );
-}
+};
 
 export default App;
