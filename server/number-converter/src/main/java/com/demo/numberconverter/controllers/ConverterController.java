@@ -18,10 +18,10 @@ public class ConverterController {
     public String getRomanConversion(@PathVariable(name = "format") String format,
                                      @RequestParam(value = "value") long numValue) {
 
-        if (format == null || format.matches(Format.DECIMAL.getSimpleName())) {
+        if (format == null || format.matches(Format.DECIMAL.getCompleteName())) {
             return this.converterService.convertDecimalToRoman(numValue);
 
-        } else if (format.matches(Format.BINARY.getSimpleName())) {
+        } else if (format.matches(Format.BINARY.getCompleteName())) {
             return this.converterService.convertBinaryToRoman(numValue);
         }
         return INVALID_MESSAGE;

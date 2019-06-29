@@ -5,16 +5,21 @@ import './App.css';
 interface Props { }
 
 interface State {
-  format: string;
+  format: Format;
   value: string;
   result: string;
+}
+
+enum Format {
+  decimal = "decimal",
+  binary = "binary"
 }
 
 export class NumberConverter extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      format: "d",
+      format: Format.decimal,
       value: "",
       result: ""
     }
@@ -35,8 +40,18 @@ export class NumberConverter extends React.Component<Props, State> {
     <div className="App">
       <div className="number-converter">
         <div className="tab-container">
-          <button className="tab">Decimal</button>
-          <button className="tab">Binary</button>
+          <button
+              className="tab"
+              onClick={() => this.setState({format: Format.decimal})}
+          >
+            Decimal
+          </button>
+          <button
+              className="tab"
+              onClick={() => this.setState({format: Format.binary})}
+          >
+            Binary
+          </button>
         </div>
         <div className="content">
           <label>Number: </label>
