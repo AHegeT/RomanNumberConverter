@@ -6,7 +6,8 @@ interface Props { }
 
 interface State {
   format: string;
-  value: number;
+  value: string;
+  result: string;
 }
 
 export class NumberConverter extends React.Component<Props, State> {
@@ -14,14 +15,18 @@ export class NumberConverter extends React.Component<Props, State> {
     super(props);
     this.state = {
       format: "d",
-      value: 0
+      value: "",
+      result: ""
     }
   }
 
   private convertValue() {
     const { format, value } = this.state;
-    axios.get(`http://localhost:8080/convert/${format}?vaule=${value}`).then(respone => {
-      console.log(respone);
+    axios.get(`http://localhost:8080/convert/${format}?value=${value}`).then(response => {
+      if (response.data) {
+        this.setState({result: response.data})
+      }
+      console.log(response);
     });
   }
 
@@ -33,11 +38,18 @@ export class NumberConverter extends React.Component<Props, State> {
           <button className="tab">Decimal</button>
           <button className="tab">Binary</button>
         </div>
-        <div className="content">s
+        <div className="content">
           <label>Number: </label>
-          <input type="number" name="numberValue" value={this.state.value}/>
+          <input
+              type="text"
+              name="numberValue"
+              value={this.state.value}
+              onChange={e => this.setState({
+                value: e.currentTarget.value
+              })}
+          />
           <label>Result: </label>
-          <input type="number" disabled name="resultValue"/>
+          <input type="text" disabled name="resultValue" value={this.state.result}/>
         </div>
         <button className="convert" onClick={() => this.convertValue()}>Convert</button>
       </div>

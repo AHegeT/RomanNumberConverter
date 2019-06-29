@@ -13,6 +13,7 @@ public class ConverterController {
 
     static final String INVALID_MESSAGE = "Invalid format";
 
+    @CrossOrigin
     @GetMapping(path = "/convert/{format}")
     public String getRomanConversion(@PathVariable(name = "format") String format,
                                      @RequestParam(value = "value") int numValue) {
