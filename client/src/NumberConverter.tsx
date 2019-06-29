@@ -27,11 +27,14 @@ export class NumberConverter extends React.Component<Props, State> {
 
   private convertValue() {
     const { format, value } = this.state;
-    axios.get(`http://localhost:8080/convert/${format}?value=${value}`).then(response => {
+    const requestURI = `http://localhost:8080/convert/${format}?value=${value}`;
+    console.log(`Making request to: ${requestURI}`);
+
+    axios.get(requestURI).then(response => {
       if (response.data) {
         this.setState({result: response.data})
       }
-      console.log(response);
+      console.log(`Obtained response: ${JSON.stringify(response)}`);
     });
   }
 
