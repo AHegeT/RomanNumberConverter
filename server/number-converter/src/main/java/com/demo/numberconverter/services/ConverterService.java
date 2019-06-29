@@ -10,22 +10,27 @@ public class ConverterService {
     static final String[] TENS = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
     static final String[] UNITS = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
-    public String convertDecimalToRoman(int numValue) {
-        return convertNumberToRoman(numValue);
+    static final String INVALID_NUMBER_MESSAGE = "Invalid number";
+
+    public String convertDecimalToRoman(long numValue) {
+        if (numValue < Integer.MIN_VALUE || numValue > Integer.MAX_VALUE) {
+            return INVALID_NUMBER_MESSAGE;
+        }
+        return convertNumberToRoman((int) numValue);
     }
 
-    public String convertBinaryToRoman(int binaryValue) {
+    public String convertBinaryToRoman(long binaryValue) {
         int decimalValue = convertBinaryToDecimal(binaryValue);
         return convertNumberToRoman(decimalValue);
     }
 
-    public int convertBinaryToDecimal(int binaryValue) {
+    public int convertBinaryToDecimal(long binaryValue) {
         int decimalValue = 0;
         int base = 1;
 
-        int r = binaryValue;
+        long r = binaryValue;
         while (r > 0) {
-            int lastDigit = r % 10;
+            long lastDigit = r % 10;
             r /= 10;
 
             decimalValue += lastDigit * base;
@@ -37,7 +42,7 @@ public class ConverterService {
 
     public String convertNumberToRoman(int numValue) {
         if (numValue < 1 || numValue > 3999) {
-            return("Invalid input");
+            return(INVALID_NUMBER_MESSAGE);
         }
 
         return new StringBuilder()

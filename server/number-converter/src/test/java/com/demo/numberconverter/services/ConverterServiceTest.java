@@ -52,7 +52,7 @@ public class ConverterServiceTest {
 
     @Test
     public void testConvertInvalidBounds() {
-        String invalidMessage = "Invalid input";
+        String invalidMessage = "Invalid number";
 
         String result = converterService.convertNumberToRoman(-1);
         assertEquals(invalidMessage, result);

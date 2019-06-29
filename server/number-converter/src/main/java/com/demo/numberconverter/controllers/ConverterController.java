@@ -16,7 +16,7 @@ public class ConverterController {
     @CrossOrigin
     @GetMapping(path = "/convert/{format}")
     public String getRomanConversion(@PathVariable(name = "format") String format,
-                                     @RequestParam(value = "value") int numValue) {
+                                     @RequestParam(value = "value") long numValue) {
 
         if (format == null || format.matches(Format.DECIMAL.getSimpleName())) {
             return this.converterService.convertDecimalToRoman(numValue);
