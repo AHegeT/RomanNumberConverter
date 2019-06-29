@@ -1,11 +1,9 @@
 package com.demo.numberconverter.controllers;
 
+import com.demo.numberconverter.enums.Format;
 import com.demo.numberconverter.services.ConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ConverterController {
@@ -13,13 +11,17 @@ public class ConverterController {
     @Autowired
     ConverterService converterService;
 
-    @RequestMapping(path = "/convert", method = RequestMethod.GET)
+    static final String INVALID_MESSAGE = "Invalid format";
+
+    @GetMapping(path = "/convert")
     public String getRomanConversion(@RequestParam(value = "initialValue") int numValue,
                                      @RequestParam(value = "format") String format) {
-        if (format != null) {
-            return this.converterService.convertDecimal(numValue);
+        if (format == null || format.matches(Format.DECIMAL.getSimpleName())) {
+            return this.converterService.convertDecimalToRoman(numValue);
+        } else if (format.matches(Format.BINARY.getSimpleName())) {
+            return this.converterService.convertBinaryToRoman(numValue);
         }
         // TODO: Create a Custom Exception
-        return "Invalid Format";
+        return INVALID_MESSAGE;
     }
 }

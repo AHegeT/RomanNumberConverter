@@ -21,7 +21,7 @@ public class ConverterServiceTest {
     @Test
     public void testConvertLessThanFourThousand() {
         for (int i = 1; i < 4; i++) {
-            String result = converterService.convertNumber((i) * 1000);
+            String result = converterService.convertNumberToRoman((i) * 1000);
             assertEquals(THOUSANDS[i], result);
         }
     }
@@ -29,7 +29,7 @@ public class ConverterServiceTest {
     @Test
     public void testConvertLessThanOneThousand() {
         for (int i = 1; i < 9; i++) {
-            String result = converterService.convertNumber((i) * 100);
+            String result = converterService.convertNumberToRoman((i) * 100);
             assertEquals(HUNDREDS[i], result);
         }
     }
@@ -37,7 +37,7 @@ public class ConverterServiceTest {
     @Test
     public void testConvertLessThanOneHundred() {
         for (int i = 1; i < 9; i++) {
-            String result = converterService.convertNumber((i) * 10);
+            String result = converterService.convertNumberToRoman((i) * 10);
             assertEquals(TENS[i], result);
         }
     }
@@ -45,7 +45,7 @@ public class ConverterServiceTest {
     @Test
     public void testConvertLessThanTen() {
         for (int i = 0; i < 9; i++) {
-            String result = converterService.convertNumber(i + 1);
+            String result = converterService.convertNumberToRoman(i + 1);
             assertEquals(UNITS[i], result);
         }
     }
@@ -54,13 +54,13 @@ public class ConverterServiceTest {
     public void testConvertInvalidBounds() {
         String invalidMessage = "Invalid input";
 
-        String result = converterService.convertNumber(-1);
+        String result = converterService.convertNumberToRoman(-1);
         assertEquals(invalidMessage, result);
 
-        result = converterService.convertNumber(0);
+        result = converterService.convertNumberToRoman(0);
         assertEquals(invalidMessage, result);
 
-        result = converterService.convertNumber(4000);
+        result = converterService.convertNumberToRoman(4000);
         assertEquals(invalidMessage, result);
     }
 

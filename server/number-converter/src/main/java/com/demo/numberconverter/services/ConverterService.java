@@ -10,11 +10,15 @@ public class ConverterService {
     static final String[] TENS = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
     static final String[] UNITS = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
-    public String convertDecimal(int numValue) {
-        return convertNumber(numValue);
+    public String convertDecimalToRoman(int numValue) {
+        return convertNumberToRoman(numValue);
     }
 
-    public String convertNumber(int numValue) {
+    public String convertBinaryToRoman(int numValue) {
+        return convertNumberToRoman(numValue);
+    }
+
+    public String convertNumberToRoman(int numValue) {
         if (numValue < 1 || numValue > 3999) {
             return("Invalid input");
         }
