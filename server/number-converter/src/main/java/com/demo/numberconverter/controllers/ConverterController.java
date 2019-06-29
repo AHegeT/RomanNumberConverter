@@ -21,18 +21,15 @@ public class ConverterController {
     @GetMapping(path = "/convert/{format}")
     public String getRomanConversion(@PathVariable(name = "format") String format,
                                      @RequestParam(value = "value") long numValue) {
+        String result = INVALID_MESSAGE;
 
-        auditService.logConversionRequest(numValue, format);
         if (format == null || format.matches(Format.DECIMAL.getCompleteName())) {
-            String result = this.converterService.convertDecimalToRoman(numValue);
-            auditService.logConversionResult(numValue, format, result);
-            return result;
+            result = this.converterService.convertDecimalToRoman(numValue);
 
         } else if (format.matches(Format.BINARY.getCompleteName())) {
-            String result = this.converterService.convertBinaryToRoman(numValue);
-            auditService.logConversionResult(numValue, format, result);
-            return result;
+            result = this.converterService.convertBinaryToRoman(numValue);
         }
-        return INVALID_MESSAGE;
+        auditService.logConversionRequest(numValue, format, result);
+        return result;
     }
 }
