@@ -64,4 +64,19 @@ public class ConverterServiceTest {
         assertEquals(invalidMessage, result);
     }
 
+    @Test
+    public void testConvertBinaryToDecimal() {
+        int result = converterService.convertBinaryToDecimal(0001);
+        assertEquals(1, result);
+
+        result = converterService.convertBinaryToDecimal(1000);
+        assertEquals(8, result);
+
+        result = converterService.convertBinaryToDecimal(1001);
+        assertEquals(9, result);
+
+        result = converterService.convertBinaryToDecimal(1111);
+        assertEquals(15, result);
+    }
+
 }

@@ -14,8 +14,25 @@ public class ConverterService {
         return convertNumberToRoman(numValue);
     }
 
-    public String convertBinaryToRoman(int numValue) {
-        return convertNumberToRoman(numValue);
+    public String convertBinaryToRoman(int binaryValue) {
+        int decimalValue = convertBinaryToDecimal(binaryValue);
+        return convertNumberToRoman(decimalValue);
+    }
+
+    public int convertBinaryToDecimal(int binaryValue) {
+        int decimalValue = 0;
+        int base = 1;
+
+        int r = binaryValue;
+        while (r > 0) {
+            int lastDigit = r % 10;
+            r /= 10;
+
+            decimalValue += lastDigit * base;
+
+            base *= 2;
+        }
+        return decimalValue;
     }
 
     public String convertNumberToRoman(int numValue) {
