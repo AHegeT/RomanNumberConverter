@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import { makeConversionRequest } from './requests';
 
 interface Props { }
 
@@ -27,14 +28,11 @@ export class NumberConverter extends React.Component<Props, State> {
 
   private convertValue() {
     const { format, value } = this.state;
-    const requestURI = `http://localhost:8080/convert/${format}?value=${value}`;
-    console.log(`Making request to: ${requestURI}`);
 
-    axios.get(requestURI).then(response => {
+    makeConversionRequest(format, value).then(response => {
       if (response.data) {
         this.setState({result: response.data})
       }
-      console.log(`Obtained response: ${JSON.stringify(response)}`);
     });
   }
 
