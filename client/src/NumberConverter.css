@@ -11,12 +11,9 @@ input:disabled {
   cursor: not-allowed;
 }
 
-.App {
+.container {
   font-family: sans-serif;
   font-size: 16px;
-}
-
-.number-converter {
   background-color: #60a8e6;
 }
 

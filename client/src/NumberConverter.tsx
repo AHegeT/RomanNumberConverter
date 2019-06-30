@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
+import './NumberConverter.css';
 import { makeConversionRequest } from './requests';
 
 interface Props { }
@@ -38,8 +38,7 @@ export class NumberConverter extends React.Component<Props, State> {
 
   render() {
     return (
-    <div className="App">
-      <div className="number-converter">
+      <div className="container">
         <div className="tab-container row">
           <label className="left">Convert to roman numeral from</label>
           <div className="right">
@@ -81,6 +80,5 @@ export class NumberConverter extends React.Component<Props, State> {
           <button className="convert right" onClick={() => this.convertValue()}>Convert</button>
         </div>
       </div>
-    </div>
   )}
 }
