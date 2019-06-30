@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import './NumberConverter.css';
 import { makeConversionRequest } from './requests';
 
@@ -26,6 +25,17 @@ export class NumberConverter extends React.Component<Props, State> {
     }
   }
 
+  private renderFormatTab(message: string, format: Format) {
+    return (
+        <button
+            className={`tab ${this.state.format === format ? 'active' : ''}`}
+            onClick={() => this.setState({ format })}
+        >
+          { message }
+        </button>
+    );
+  }
+
   private convertValue() {
     const { format, value } = this.state;
 
@@ -42,18 +52,8 @@ export class NumberConverter extends React.Component<Props, State> {
         <div className="tab-container row">
           <label className="left">Convert to Roman numeral from</label>
           <div className="right">
-            <button
-                className={`tab ${this.state.format === Format.decimal ? 'active' : ''}`}
-                onClick={() => this.setState({format: Format.decimal})}
-            >
-              Decimal
-            </button>
-            <button
-                className={`tab ${this.state.format === Format.binary ? 'active' : ''}`}
-                onClick={() => this.setState({format: Format.binary})}
-            >
-              Binary
-            </button>
+            {this.renderFormatTab("Decimal", Format.decimal)}
+            {this.renderFormatTab("Binary", Format.binary)}
           </div>
         </div>
         <div className="row">
