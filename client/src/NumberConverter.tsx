@@ -42,34 +42,46 @@ export class NumberConverter extends React.Component<Props, State> {
     return (
     <div className="App">
       <div className="number-converter">
-        <div className="tab-container">
-          <button
-              className="tab"
-              onClick={() => this.setState({format: Format.decimal})}
-          >
-            Decimal
-          </button>
-          <button
-              className="tab"
-              onClick={() => this.setState({format: Format.binary})}
-          >
-            Binary
-          </button>
+        <div className="tab-container row">
+          <label className="left">Convert to roman numeral from</label>
+          <div className="right">
+            <button
+                className={`tab ${this.state.format === Format.decimal ? 'active' : ''}`}
+                onClick={() => this.setState({format: Format.decimal})}
+            >
+              Decimal
+            </button>
+            <button
+                className={`tab ${this.state.format === Format.binary ? 'active' : ''}`}
+                onClick={() => this.setState({format: Format.binary})}
+            >
+              Binary
+            </button>
+          </div>
         </div>
-        <div className="content">
-          <label>Number: </label>
-          <input
+        <div className="row">
+          <label className="left">Number</label>
+          <div className="right">
+            <input
               type="text"
               name="numberValue"
               value={this.state.value}
               onChange={e => this.setState({
                 value: e.currentTarget.value
               })}
-          />
-          <label>Result: </label>
-          <input type="text" disabled name="resultValue" value={this.state.result}/>
+            />
+          </div>
         </div>
-        <button className="convert" onClick={() => this.convertValue()}>Convert</button>
+        <div className="row">
+          <label className="left">Result</label>
+          <div className="right">
+            <input type="text" disabled name="resultValue" value={this.state.result}/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="left"></div>
+          <button className="convert right" onClick={() => this.convertValue()}>Convert</button>
+        </div>
       </div>
     </div>
   )}
