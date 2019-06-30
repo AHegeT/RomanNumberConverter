@@ -3,19 +3,24 @@ package com.demo.numberconverter.controllers;
 import com.demo.numberconverter.enums.Format;
 import com.demo.numberconverter.services.AuditService;
 import com.demo.numberconverter.services.ConverterService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 
 @RestController
 public class ConverterController {
 
-    @Autowired
-    ConverterService converterService;
-    @Autowired
-    AuditService auditService;
+    private static final String INVALID_MESSAGE = "Invalid format";
 
-    static private final String INVALID_MESSAGE = "Invalid format";
+    private ConverterService converterService;
+    private AuditService auditService;
+
+    public ConverterController(@NotNull ConverterService converterService,
+                               @NotNull AuditService auditService) {
+        this.converterService = converterService;
+        this.auditService = auditService;
+    }
 
     @CrossOrigin
     @GetMapping(path = "/convert/{format}")

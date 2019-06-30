@@ -39,10 +39,18 @@ export class NumberConverter extends React.Component<Props, State> {
   private convertValue() {
     const { format, value } = this.state;
 
+    if (!value || value === "") {
+        this.setState({result: "Invalid number"});
+        return;
+    }
+
     makeConversionRequest(format, value).then(response => {
       if (response.data) {
         this.setState({result: response.data})
       }
+    }).catch(error => {
+        console.log(error);
+        this.setState({result: "Invalidad request"})
     });
   }
 
