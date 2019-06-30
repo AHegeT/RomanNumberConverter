@@ -40,7 +40,7 @@ export class NumberConverter extends React.Component<Props, State> {
     return (
       <div className="container">
         <div className="tab-container row">
-          <label className="left">Convert to roman numeral from</label>
+          <label className="left">Convert to Roman numeral from</label>
           <div className="right">
             <button
                 className={`tab ${this.state.format === Format.decimal ? 'active' : ''}`}
