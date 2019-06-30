@@ -11,7 +11,7 @@ interface State {
   result: string;
 }
 
-enum Format {
+export enum Format {
   decimal = "decimal",
   binary = "binary"
 }
