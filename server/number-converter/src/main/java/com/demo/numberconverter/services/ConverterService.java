@@ -20,14 +20,15 @@ public class ConverterService {
     }
 
     public String convertBinaryToRoman(long binaryValue) {
+        if (binaryValue < 0 || binaryValue > 111110100000L) {
+            return INVALID_NUMBER_MESSAGE;
+        }
         int decimalValue = convertBinaryToDecimal(binaryValue);
+
         return convertNumberToRoman(decimalValue);
     }
 
     public int convertBinaryToDecimal(long binaryValue) {
-        if (binaryValue > 111110100000L) {
-            return 4000;
-        }
         int decimalValue = 0;
         int base = 1;
 
