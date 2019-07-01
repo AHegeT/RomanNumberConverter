@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ConverterServiceTest {
 
+    static private final String INVALID_MESSAGE = "Invalid number";
     static private final String[] THOUSANDS = {"", "M", "MM", "MMM"};
     static private final String[] HUNDREDS = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
     static private final String[] TENS = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
@@ -52,16 +53,14 @@ public class ConverterServiceTest {
 
     @Test
     public void testConvertInvalidBounds() {
-        String invalidMessage = "Invalid number";
-
         String result = converterService.convertNumberToRoman(-1);
-        assertEquals(invalidMessage, result);
+        assertEquals(INVALID_MESSAGE, result);
 
         result = converterService.convertNumberToRoman(0);
-        assertEquals(invalidMessage, result);
+        assertEquals(INVALID_MESSAGE, result);
 
         result = converterService.convertNumberToRoman(4000);
-        assertEquals(invalidMessage, result);
+        assertEquals(INVALID_MESSAGE, result);
     }
 
     @Test
@@ -77,6 +76,15 @@ public class ConverterServiceTest {
 
         result = converterService.convertBinaryToDecimal(1111);
         assertEquals(15, result);
+    }
+
+    @Test
+    public void testConvertBigBinaryToDecimal() {
+        final String limitConversion = converterService.convertBinaryToRoman(111110011111L);
+        final String excessiveConversion = converterService.convertBinaryToRoman(111110100000L);
+
+        assertEquals("MMMCMXCIX", limitConversion);
+        assertEquals(INVALID_MESSAGE, excessiveConversion);
     }
 
 }

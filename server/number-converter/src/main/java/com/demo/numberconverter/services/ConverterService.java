@@ -25,6 +25,9 @@ public class ConverterService {
     }
 
     public int convertBinaryToDecimal(long binaryValue) {
+        if (binaryValue > 111110100000L) {
+            return 4000;
+        }
         int decimalValue = 0;
         int base = 1;
 
