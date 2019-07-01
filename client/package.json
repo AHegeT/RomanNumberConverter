@@ -42,5 +42,11 @@
     "enzyme-to-json": "^3.3.5",
     "identity-obj-proxy": "^3.0.0",
     "react-test-renderer": "^16.8.6"
-  }
+  },
+  "jest":{
+        "moduleNameMapper":{
+             "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+             "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+        }
+   }
 }
