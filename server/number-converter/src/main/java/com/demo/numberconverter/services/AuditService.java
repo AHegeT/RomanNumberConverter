@@ -13,6 +13,12 @@ public class AuditService {
     private static final String LOG_FILE = "./audit/conversions.log";
     private static final Logger logger = LoggerFactory.getLogger(AuditService.class);
 
+    /**
+     * Logs the petition and result of a conversion, successful or not.
+     * @param requestedValue value to convert
+     * @param requestedFormat format to convert from
+     * @param requestResult successful conversion result or error message
+     */
     public void logConversionRequest(long requestedValue, String requestedFormat, String requestResult) {
         String message = String
                 .format("%s | %d | %s | %s %n",
@@ -21,6 +27,10 @@ public class AuditService {
         log(message);
     }
 
+    /**
+     * Logs a message into the audit file
+     * @param message formatted message to log in file
+     */
     private void log(String message) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))) {
             writer.write(message);
